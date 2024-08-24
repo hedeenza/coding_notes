@@ -1,0 +1,120 @@
+Learn Python - Full Course for Beginners [Tutorial]
+https://www.youtube.com/watch?v=rfscVS0vtbw
+~ 4.5 hours
+
+
+00:00:00 Introduction
+00:01:45 Installing python and pycharm
+00:06:40 Setup and hello world
+00:10:23 Drawing a shape
+00:15:06 Variables and Data types
+00:27:03 Working with strings
+00:38:18 Working with numbers
+00:48:26 Getting input from users
+00:52:37 Building a basic calculator
+00:58:27 Mad libs Game 
+
+01:03:10 Lists 
+01:10:44 List Functions 
+01:18:57 Tuples 
+01:24:15 Functions 
+01:34:11 Return statement 
+01:40:06 If statement 
+01:54:07 If statements and comparisons 
+
+02:00:37 Building a better calculator 
+02:07:17 Dictionaries
+02:14:13 While loop
+02:20:21 Building a Guessing game
+02:32:44 For loop
+02:41:20 Exponent Function 
+02:47:13 2D lists and nested loop
+02:52:41 Building a Translator 
+
+03:00:18 Comments 
+03:04:17 Try/Except 
+03:12:41 Reading Files 
+03:21:26 Writing a file
+03:28:13 Modules and pip 
+03:43:56 Classes and Objects 
+03:57:37 Building a Multiple choice quiz
+
+04:08:28 Object Function 
+04:12:37 Inheritance 
+04:20:43 Python interpreter
+
+
+// Installing Python
+        downlaod from the website
+        python2 - legacy version 
+        python3 - newest version, actively maintained
+        Run the installer
+
+
+// Choosing a text-editor
+        Some IDEs are specifically for Python
+        PyCharm is one of the most popular ones
+        jetbrains.com/pycharm
+                the community version is free and open source
+
+
+// First program - "Hello World"
+        Configure > Preferences > Theme
+        Create new project
+                select the python version 3 as your interpreter
+
+        print("Hello World") - anything in here is printed to the console
+
+
+// Drawing a shape!
+
+print("   /|")  prints each line one at a time
+print("  / |")  will print IN ORDER
+print(" /  |")
+print("/___|")
+
+
+// Variables and Data Types
+
+variable = a container to hold some data
+
+separate words in a variable with an underscore
+        e.g. character_name = "John"
+             print("There once was a man named " + character_name + ", ")
+                                add pluses in line to continue the string
+
+"Strings" = plain text
+Numbers = numbers (integers and float)
+Boolean = TRUE / FALSE
+
+
+// Working with Strings
+        need "" around your strings
+        \n - will insert a new line in the string (inside the ""!)
+        \" - will "escape" the ". 'I literally want to print a "'
+        concatenation - adding one string to another, like in the character_name example
+
+        phrase = "Giraffe Academy"
+        print(phrase.lower())       # lower() makes it all lower case
+        print(phrase.upper())       # upper() makes it all upper case
+
+        print(phrase.isupper())     # returns boolean value, checking if it's all in upper case
+        print(phrase.upper().isupper())     # set all upper, checks if it's all upper, returns boolean
+
+        print(len(phrase))          # get the length of the string
+
+        print(phrase[0])            # get the first character of the string
+                                    # PYTHON IS A ZERO INDEX LANGUAGE, i.e. the first value is 0, not 1
+
+        print(phrase.index("a"))    # returns 3 because that's where that letter appears first in the string
+        print(phrase.index("Acad")) # returns 8 because that's where the chunk appears in the string
+        
+        print(phrase.replace("Giraffe", "Elephant")     # replaces the whole word Giraffe with the whole world Elephant
+
+
+// Working with Numbers
+
+# left off at 00:38:22 / 04:26:51
+
+
+
