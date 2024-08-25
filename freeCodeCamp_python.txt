@@ -219,17 +219,217 @@ using parentheses () for a tuple
 using square brackets [] for a list
 
 
+// Functions
 
-pick up again at 01:24:24
+collection of code that performs a specific task 
+
+def  # the keyword that will create a function
+
+def say_hi():  # "all the code that comes after this line will be in the function
+    print("Hello user")  # you need to indent for it to be in the function!
+
+nothing will happen until you call your function 
+
+say_hi()  # this will call the funciton 
+          # python will execute code in top down order that it is asked to 
+
+parameter = a piece of information we give to the function 
 
 
+def say_hi(name, age):  # we have to give it a name for it to run
+    print("Hello " + name + ", you are" + age)
+
+say_hi("Mike", "35")
+
+>>> Hello Mike, you are 35
 
 
+// Return functions
+
+sometimes when we run a program, we want to get some info back from the function
+return allows us to get that information 
+
+def cube(num):
+    return num * num * num  # returns the result of this operation
+                            # return breaks you out of the function / nothing written in the function after the return line will get performed
+
+print(cube(3))
 
 
+// if statements - making decisions
+
+is_male = FALSE
+is_tall = TRUE
+
+if is_male or is_tall:
+    print("You are male, or tall, or both")
+elif is_male and not(is_tall):  # not() negates what's inside it
+    print("You are a short male")
+elif not(is_male) and is_tall:
+    print("You are not a male but are tall")
+else:
+    print("You are neither male nor tall")
+
+operators: or, and 
 
 
+// If statements and comparisons
+
+def max_num(num1, num2, num3):
+    if num1 >= num2 and num1 >= num3:
+        return num1
+    elif num2 >= num1 and num2 >= num3:
+        return num2
+    else:
+        return num3
+
+print(max_num(300, 40, 5))
+
+comparison operators: ==, '!=", <=, >, etc. 
 
 
+// Building a better calculator
 
 
+num1 = float(input("Enter first number: "))
+op = input("Enter operator: ")
+num2 = float(input("Enter second number: "))
+
+if op == "+":
+    print(num1 + num2)
+elif op == "-":
+    print(num1 - num2)
+elif op == "/":
+    print(num1 / num2)
+elif op == "*":
+    print(num1 * num2)
+else:
+    print("Invalid operator
+
+
+// Dictionaries
+
+word = key
+definition = value
+
+monthConversions = {}  # dictionaries are inside the curly brackets
+
+then define the key/value pairs 
+!!! There cannot be duplicate entries !!!
+
+monthConversions = {
+    "Jan": "January",
+    "Feb": "February",
+    "Mar": "March",
+    "Apr": "April",
+    "May": "May",
+    "Jun": "June",
+    "Jul": "July",
+    "Aug": "August",
+    "Sep": "September",
+    "Oct": "October",
+    "Nov": "November",
+    "Dec": "December"
+}
+
+# refer to the dictionary by name, and use the indexes
+
+dictionary["key"]  # will get you the value associated with that key
+print(monthConversions["Jan"])  # will return "January"
+print(monthConversions.get("Dec"))  # will return "December"
+
+using get(), you can define a default value
+
+print(monthConversions.get("Truck", "Not a valid Key"))
+
+the keys and values can be of any data type
+
+
+// While loop 
+
+for executing a lot of code over and over until a condition is met
+
+i = 1
+while i <= 10:
+    print(i)
+    i = i + 1  # or i += 1 to add one to i each time, shorthand version
+
+print("Done with loop")
+
+
+// Building a guessing game
+
+secret_word = "giraffe"
+guess = ""
+guess_count = 0
+guess_limit = 3
+out_of_guesses = FALSE
+
+while guess != secret_word and not(out_of_guesses):
+    if guess_count < guess_limit:
+        guess = input("Enter guess: ")
+        guess_count += 1
+    else:
+        out_of_guesses = TRUE
+
+if out_of_guesses:
+    print("You lose the game")
+else: 
+    print("You win!")
+
+
+// for loops
+
+special loop that loops over collections of items
+a different value each iteration
+
+
+for letter in "Giraffe Academy":
+    print(letter)  # prints everything out, one letter at a time
+
+friends = ["Jim", "Karen", "Kevin"]
+for friend in friends:
+    print(friend)
+
+
+for index in range(3, 10):
+    print(index)  # print everything including 3, not including 10
+
+for index in range(len(friends)):
+    print(friends[index])    # prints the index values for each in the array
+
+for index in range(5):
+    if index == 0:
+        print("First Iteration:)
+    else:
+        print("Not First")
+
+
+// Exponential Functions
+
+** for the exponent
+
+def raise_to_power(base_num, pow_num):
+    result = 1
+    for index in range(pow_num):
+        result = result * base_num
+    return result
+
+print(raise_to_power(3, 2))
+
+
+// 2D Lists and Nested Loops
+
+lists within lists
+
+number_grid = [  # this is a grid of 4 rows, 3 columns
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [0]
+]
+
+to access the index positions of each element
+    [row index, column index]
+
+pick up again 02:49:56
