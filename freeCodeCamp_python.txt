@@ -114,7 +114,122 @@ Boolean = TRUE / FALSE
 
 // Working with Numbers
 
-# left off at 00:38:22 / 04:26:51
+        You can do all the normal mathematical operations
+        % - "mod" - give JUST the remainder in a division operation
+        str(number) - converts the number to a string
+
+        abs(number) - returns the absolute value
+        pow(number, exponent) - returns the exponential result
+        max(list, of, numbers) - returns the highest value
+        min()
+        round()
+
+importing outside code into your program 
+
+from MODULE import y
+e.g. from math import *
+        
+        floor() - rounds down to the nearest whole
+        ceil() - rounds up to th nearest whole
+        sqrt() - the square root of the 
+
+
+// Get user input
+
+name = input("Prompt: ")  # taking the user input and assigning it to the variable "name"
+print("Hello " + name + "!")  # prints the name in a string!
+
+
+// Buildling a calculator
+
+num1 = input("Enter a number: ")
+num2 = input("Enter a number: ")
+results = num1 + num2
+
+print(result)  # but wait, they're strings right now! 
+
+
+num1 = input("Enter a number: ")
+num2 = input("Enter a number: ")
+results = float(num1) + float(num2)
+
+print(result)  # but wait, they're strings right now! 
+
+
+// Madlibs Game
+
+color = input("Enter a color: ")
+plural_noun = input("Enter a Plural Noun: ")
+celebrity = input("Enter a celebrity: ")
+
+print("Roses are " + color)
+print(plural_noun + "are blue")
+print("I love " + celebrity)
+
+
+// Lists
+
+storing a lot of information in one space
+
+list_name = ["first", "second", "third"]
+        you can store multiple data types in one string
+
+print(list_name[2])  # prints the third element on the list
+print(list_name[-1])  # access the list from the end with negative numbers, starting with the last value being -1
+print(list_name[1:])  # every item from position 1 to the end
+print(list_name[1:3])  # every item from position 1 through position 3
+
+You can reassign values...
+list_name[1] = "new item"
+
+
+// List Functions
+
+extend()  # adds one list to the end of another lsit
+    x.extend(y)
+
+append()  # adds a value to the end of the list
+
+insert(index_position, element_to_insert)
+
+remove(element_to_remove)
+
+clear() # no arguments
+
+pop() # takes off the last element from the list
+
+index(item_I_want_to_check_the_existence_of)  # returns the index of the item, if it's there
+
+count(item_I_want_to_check_the_existence_of)  # returns how many times that value occurs in the list
+
+sort()  # sorts the list
+
+reverse()  # reverses the order of the list
+
+copy()  # copies the list
+
+
+// Tuples
+
+tuples: like lists, but with important differences
+        tuples are IMMUTABLE, they cannot be changed once they're set
+        often used when you want to store values that will not change
+
+using parentheses () for a tuple
+using square brackets [] for a list
+
+
+
+pick up again at 01:24:24
+
+
+
+
+
+
+
+
+
 
 
 
