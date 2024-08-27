@@ -432,4 +432,71 @@ number_grid = [  # this is a grid of 4 rows, 3 columns
 to access the index positions of each element
     [row index, column index]
 
-pick up again 02:49:56
+print(number_grid[2][1])  # one square bracket next to the other
+
+for row in number_grid:
+    print(row)  # will print each row
+
+
+for row in number_grid:
+    for col in row:
+        print(col)  # will print each element indicidually, in order
+
+
+// Building a Translator
+
+def translate(phrase):
+    translation = ""  # empty string to start
+    for letter in phrase:  # access each letter in the phrase
+        if letter in "AEIOUaeiou":  # check if it's within this range
+            translation = translation + "g"
+        else:
+            translation = translation + letter
+    return translation 
+
+print(translate(input("Enter a phrase"))
+
+
+# You can refine the checking whether it's a vowel by changing it to 
+if letter.lower() in "aeiou":  
+
+# Incorporating a capital G as first letter
+
+if letter.lower() in "aeiou":
+    if letter.isupper():
+        translation = translation + "G"
+    else: 
+        translation = translation + "g"
+
+
+// Comments in Python
+
+comments don't get executed
+used for humans to explain what's happening in the code
+# use the hashtag symbol 
+
+'''
+you can also 
+comment multiple lines
+with the triple apostrophe
+'''
+
+You can 'comment out' a line of code if it's causing issues
+        help in the debuging process
+
+
+// Try Except 
+
+handling errors when they occur instead of just stopping the program
+
+number = int(input("Enter a number"))
+print(number)  # will throw an error if you don't input an integer
+
+try:
+    number = int(input("Enter a number: "))
+    print(number
+except: 
+    print("Invalid Input")  # now it won't break, but it will print what we tell it to if there's an issue
+
+
+continue 03:08:01
