@@ -499,4 +499,248 @@ except:
     print("Invalid Input")  # now it won't break, but it will print what we tell it to if there's an issue
 
 
-continue 03:08:01
+you can have your code handle different types of errors differently
+
+except ZeroDivisionError:
+    print("Divided by zero")
+except ValueError:
+    print("Invalid Input")
+
+you can store the error as a variable
+
+except ZeroDivisionError as err:
+    print(err)
+
+best practice in python is to write except scenarios for each specific error rather than 
+        a general "except".
+
+
+// Reading files in Python
+
+reading in information from external files
+
+open(file_name OR file_path, mode_to_open_the_file)
+        # "r" - read = "just want to see what's in it"
+        # "w" - write = "i can change the file"
+        # "a" - "append = "add stuff to the end"
+        # "r+" = "read and write"
+
+good practice to close the file at some point as well
+
+employee_file = open("employees.txt", "r")
+
+employee_file.close()
+
+
+good to check whether the file is actually readable before you try to do anything with it!
+
+print(employee_file.readable())  # returns a boolean T/F
+
+
+you can read everyting in the file...
+
+.read()
+
+or line by line 
+
+.readline()  # you can stack these in a few lines to have it read multiple lines in a row
+
+but you can reference the index of a specific line with 
+
+.readlines()[1]  # reads the line at index position 1
+
+# reading with a for loop
+for employee in employee_file.readlines():
+    print(employee)
+
+
+// Writing and appending to files
+
+employee_file = open("employees.txt", "a")  # makes sure we're in append mode
+employee_file.write("Toby - Human Resources")  # adds this line to the list
+employee_file.close()
+
+be careful when appending - you can easily mess up the source file
+
+you need a new line character to add an entry to a new line "\n"
+
+!!! Careful, "w" will completely overwrite the original file !!!
+
+
+// Modules and Pip
+
+module = a python file we can import into our projects
+
+import useful_tools  # now you can use all of the attributes from the other file
+
+there are indexes of modules online that we can access!
+        check the python.org main site
+
+built-in modules = are always available, as soon as you install python
+external modules = External libraries > Lib > the external modules we downloaded!
+
+third-party module installation:
+
+In the command line...
+pip --version # Check that pip is installed
+pip install external_module_name  # installs the specified module
+pip uninstall external_module_name  # uninstall the specified module
+
+In your project
+import external_module_name #  sometimes the import name is not exactly the same as the package name
+
+
+// Classes and Objects
+
+help make your programs more organized and more powerful
+
+classes ~ creating your own data types
+
+class name_of_new_class
+
+class Student:
+    
+    def __init__(self, name, major, gpa, is_on_probation):  # an initialize function, mapping what attributes a Student should have
+        self.name = name  # the 'self' part means the object name will be the 
+        self.major = major  # name that the writer passes in when this class 
+        self.gpa = gpa  # gets used later, i.e. student1, student2
+        self.is_on_probation = is_on_probation  # "the probation status of the object = the value we passed in up top"
+
+# now in a different file, we can creat a student!
+        # an Object is an actual Student, not just what it should be
+
+from Student import Student  # from the Student file, import the Student class we just created
+
+student1 = Student("Jim", "Business", 3.1, False)  # created a student object
+
+print(student1)  # we can access the individual aspects from this student
+print(student1.name)  # prints the name
+
+student2 = Student("Pam", "Art", 2.5, True)
+print(student2.gpa)
+
+you can do this with ANYTHING
+
+
+// Building a multiple-choice quiz
+
+question_prompts = [
+    "What color are apples?\n(a) Red/Green\n(b) Purple\n(c) Orange\n\n",
+    "What color are bananas?\n(a) Teal\n(b) Magenta\n(c) Yellow\n\n",
+    "What color are strawberries?\n(a) Yellow\n(b) Red\n(c) Blue\n\n",
+]
+
+# we need to keep track of the prompts and their answers
+
+question.py
+
+class Question:
+    def __init__(self, prompt, answer):  # everything will have a question and an answer
+        self.prompt = prompt
+        self.answer = answer
+
+back in app.py
+
+from Question import Question
+
+questions = [
+    Question(question_prompts[0], "a"),  # tracking the prompt and the answer to that prompt
+    Question(question_prompts[1], "c"),
+    Question(question_prompts[2], "b"),
+]
+
+def run_test(questions):  # loop through all the questions, get the user's answer, check answer against key
+    score = 0  # we'll add to the score as the test goes
+    for question in questions:  # for each question in the questions array we made
+        answer = input(question.prompt)  # sets the answer to be equal to the answer assigned to that prompt
+        if answer == question.answer:  # if the answer the user provides is equal to the key
+            socre += 1  # add one to the score
+    print("You got " + str(score)= "/" + str(len(questions)) + " correct")  # Track score, converting the number values to strings so they can be displayed in the string, calculating the number of questions wtih the len(questions)
+
+run_test(questions)
+
+
+// Class and Object Functions
+
+a function we can use inside of a class to...
+        modify the objects of that class
+        get specific information about those objects
+
+defining a function within a class so that all of the objects 
+        of that class have access to that function
+
+class Student:
+    def __init__(self, name, major, gpa):
+        self.name = name
+        self.major = major
+        self.gpa = gpa
+
+    def on_honor_roll(self):
+        if self.gpa >= 3.5:
+            return True
+        else:
+            return False
+
+print(student1.on_honor_roll())  # will return true if the gpa meets the requirement, false if not
+
+
+// Inheritence
+
+defining attributes and functions inside of a class...
+        then creating another class that can INHERIT all of those attributes
+
+# an example with an arbitrary class
+
+class Chef:
+    def make_chicken(self):
+        print("The chef makes chicken")
+
+    def make_salad(self):
+        print("The chef makes salad")
+
+    def make_special_dish(self):
+        print("The chef makes a special dish")
+
+# in another file...
+
+from Chef import Chef
+
+myChef() = Chef()  # the new chef I'm creating is of the Chef class we set up in the other file
+
+myChef.make_chicken()  # calls the make_chicken() function we created in the chef class earlier
+
+
+# Creating a Chinese Chef class
+
+from Chef import Chef
+
+class chinese_chef(Chef):  # "I want the Chinese chef to be able to use all of the functions we already set up in the chef class"
+    def make_fried_rice(self):
+        print("The chef makes fried rice")
+    def make_special_dish(self):
+        print("The chef makes orange chicken")  # this will override the special dish function we inherited from the Chef class
+
+from chinese_chef import chinese_chef
+
+
+// Python Interpreter
+
+trying out python commands in a safe and neutral environment
+
+in you command prompt or CLI of choice...
+
+start in python mode by typing python or python3 depending on what your system is set up to handle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
