@@ -55,7 +55,7 @@ Contents
         # g = gammas
         # h = hadrons
         # converting these from g's and h's to 0's and 1's
-    df["class"] = (df["class"] == "g").astype(int) # if it is a g, will make it 1, if it's not, will make it a 0
+    df["class"] = (df["class"] == "g").astype(int) # if it is a g, will make it 1, if it's not, aka it's an h, will make it a 0
 
     # We're building a CLASSIFICATION MODEL
         # Determining whether future samples are g or h based on their features
@@ -98,11 +98,76 @@ Reinforcement Learning = an agent is learning based on an interactive environmen
 
 
 00:17:23 Classification/Regression
-    stopped here
-
+    Supervised Learing Tasks
+        Classification - predict discrete classes 
+            multi-class classification - many possible classes, like plant species from a list
+            binary-class classification - positive/negative, cat/dog, spam/not spam
+        Regression - trying to come up with a number that's on some sort of scale
+            gas prices, temperature tomorrow, house prices
 
 00:19:57 Training Model
+    Each row = a different data sample, the "feature vector" is all of the features in that row 
+            - all of the features in all of the rows is the "feature matrix"
+    Each column = a different feature
+    ONE column = the label, the "target vector" is the label for that feature vector
+            - all of the labels in all of the rows is the "target/labels matrix"
+
+    Training = tinkering with the model so its output gets closer and closer to the known values
+            - we don't use *all* of the data in training. If we did, we wouldn't know whether the model could handle new data
+                TRAINING DATASET
+                VALIDATION DATASET
+                    - used during or after training to make sure the model can handle unseen data
+                    - the loss from this data set NEVER gets fed back into the model, like the trainig dataset does
+                TESTING DATASET
+                    might be a 60-20-20 or 80-10-10 split between them
+            - "loss" = the difference between the prediction by the model and the true values
+                    - used at the end so we can see how generalizable our model is
+                    - the TESTING DATA is where the final performance of your model is reported
+    
+    Performance Metrics
+        "L1 Loss" = sum( |real - predicted| )
+        "L2 Loss" = sum( (real - predicted)^2 ) # quadratic - so if it's close, the penalty is small, if it's off by a lot, there's a large penalty
+        "Binary Cross-Entropy Loss" = -1/N * sum(real * log(predicted) + (1-real) * log((1-predicted)))
+        LOSS DECREASES AS PERFORMANCE GETS BETTER
+
+        "Accuracy" = how many times did it get it right out of how many times it made a prediction
+
 00:30:57 Preparing Data
+    
+    # Back to the MAGIC data
+    for label in cols[:-1]:  # going up to the last item in the list
+        plt.hist(df[df["class"]==1][label], color="blue", label='gamma', alpha=0.7, density=True) 
+        plt.hist(df[df["class"]==0][label], color="red", label='hadron', alpha=0.7, density=True) 
+
+            # [df["class"]==1] means "get me everything from the table where the class is equal to 1"
+            # ][label] means "now that you've done that, just get me the column labels
+            # color = the histogram will be blue for the 1's, red for the 0's
+            # label = the label for that group of data
+            # alpha = transparency
+            # density = True means the histograms will be normalized, and more visually comparable even though they may contain a different number of values (there's probably not 50% 1's and 50% 0's)
+
+        plt.title(label)  # the title of the graph will be the column label
+        plt.ylabel("Probability")  # the y-axis will be labeled probability
+        plt.xlabel(label)  # the x-axis will also be the column label
+        plt.legend()  # we're adding a legend
+        plt.show()  # we want to show the plot!
+
+    train, validate, test = np.split(df.sample(frac=1), [int(0.6*len(df)), int(0.8*len(df)) ])
+        # splitting the dataset into our "train", "validate", and "test" groups
+        # np to call numpy
+        # .split to split the data into sections
+        # df to bring in the dataframe we assigned to 'df'
+        # .sample to randomly split it 
+        # (frac=1) you want 100% of the data to get sampled
+        # [int(0.6*len(df),  will assign 60% of the length of the dataframe to the "train" group
+        # int(0.8*len(df) ])  will assign from 60% to 80% of the length of the dataframe (the next 20%) to the "validate" group
+        # the last 20% gets automatically assigned
+
+    # Scaling the dataset so the magnitude of the values in each different column doesn't throw anything off
+        # having values in one column be like 1000 and in another column be like 1 may weight the predictive capabilities in ways you don't want????
+    def scale_dataset(dataframe): 
+           x = dataframe[dataframe.cols[:-1]].values
+
 00:44:43 K-Nearest Neighbors
 00:52:42 KNN Implementation
 01:08:43 Naive Bayes
