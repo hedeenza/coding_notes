@@ -481,10 +481,143 @@ nn_model = tf.keras.Sequential([
     ])
 
 nn_model.compile(
-        01:53:05
+    optimizer=tf.keras.optimizers.Adam(0.001), # learning rate is 0.001
+    loss='binary_crossentropy'  # our loss type
+    metrics=['accuracy']) # so we can see accuracy in a plot later
 
+# Adding in tensor-flow pre-defined plots for loss and accuracy
+            # These will need to go ABOVE our nn_model.compile() section
+def plot_loss(history):
+    plt.plot(history.history['loss'], label='loss')
+    plt.plot(history.history['val_loss'], label='val_loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Binary crossentropy')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+            # This one is plotting the loss over each of the Epochs
+            # an "Epoch" is a training cycle
+
+def plot_accuracy(history):
+    plt.plot(history.history['accuracy'], label='accuracy')
+    plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('accuracy')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+            # This one is plotting the accuracy over each of the Epochs
+            # an "Epoch" is a training cycle
+
+# tensorflow keeps track of all the history, allowing you to plot it later on
+history = nn_model.fit(
+        x_train, y_train,
+        epochs=100,
+        batch_size=32,
+        validation_split=0.2,  # fraction of the training data to be used as the validation data
+        verbose=0  # don't print anything as you run
+)
+        # Running this step will take some time. Let it cook while it trains.
+
+# Now that it's cooked, plot the loss and history throughout the training
+plot_loss(history)
+plot_accuracy(history)
+
+# The graphs reveal that loss is decreasing and accuracy is increasing over time, which is good!
+        # Note it will say it's performing better on the training data than on the validation data
+        # This is because it is adapting specifically to the training data
+
+# Re-writing the neural network to use a "grid seach", allowing us to test multiple hyper-parameters like number of nodes in each layer
+        # Adding a drop-out layer too, which randomly chooses nodes not to train on certain cycles, which REDUCES over-fitting of the model
+def train_model(x_train, y_train, num_nodes, dropout_prob, learning_rate, batch_size, epochs):
+    nn_model = tf.keras.Sequential([
+        tf.keras.layers.Dense(num_nodes, activation='relu', input_shape=(10,)), # number of nodes is set to the num_nodes variable
+        tf.keras.layers.Dropout(dropout_prob), # added a dropout node, the probability it doesn't train a node is set to the dropout_prob variable
+        tf.keras.layers.Dense(num_nodes, activation='relu'), 
+        tf.keras.layers.Dropout(dropout_prob), # added a dropout node, the probability it doesn't train a node is set to the dropout_prob variable
+        tf.keras.layers.Dense(1, activation='sigmoid') 
+        ])
+
+    nn_model.compile(
+            optimizer=tf.keras.optimizers.Adam(learning_rate), # changed to the learning_rate variable
+            loss='binary_crossentropy'  
+            metrics=['accuracy']
+            ) 
+
+    history = nn_model.fit(
+        x_train, y_train,
+        epochs=epochs, # number of epochs set to epochs variable
+        batch_size=batch_size, # batch size changed to the batch_size variable
+        validation_split=0.2,  
+        verbose=0  
+        )
+
+    return nn_model, history
+
+# Re-writing our plotting functions so they're side by side for easier viewing
+def plot_loss(history):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,4))  # we want one row, two columns for that row, and those will be my plots; figure is 10 units wide and 4 units tall (size ratio)
+    ax1.plot(history.history['loss'], label='loss')
+    ax1.plot(history.history['val_loss'], label='val_loss')
+    ax1.set_xlabel('Epoch')
+    ax1.set_ylabel('Binary crossentropy')
+    ax1.grid(True)
+    plt.show()
+
+    ax2.plot(history.history['accuracy'], label='accuracy')
+    ax2.plot(history.history['val_accuracy'], label='val_accuracy')
+    ax2.set_xlabel('Epoch')
+    ax2.set_ylabel('accuracy')
+    ax2.grid(True)
+    plt.show()
+
+
+# Setting our variables and our nested for loops in order to test out every combination of these variables
+least_val_loss = float('inf')  # to help us keep track of the model with the least validation loss
+least_loss_model = None
+
+epochs=100
+for num_nodes in [16, 32, 64]:
+    for dropout_prob in [0, 0.2]:
+        for learning_rate in [0.01, 0.005, 0.001]:
+            for batch_size in [32, 64, 128]:
+                print(f"{num_nodes} nodes, dropout {dropout_prob}, learning rate {learning_rate}, batch size {batch_size}") # printing out all of our parameters
+                model, history = train_model(x_train, y_train, num_nodes, dropout_prob, learning_rate, batch_size, epoch)
+                plot_history(history)
+                val_loss = mode.evaluate(x_valid, y_valid)  # figuring out our loss for the validation set from our original data split
+
+                if val_loss < least_val_loss:
+                    least_val_loss = val_loss  # if something beats what's the least so far, make that what we keep track of in the least variable
+                    least_loss_model = model  # the model with the least loss is whatever model just set the record for the least amount of loss
+
+
+# !!! one option is, in the "history =", section...
+            # to pass in the "validation_data=valid" instead of the 
+            # "validation_split=0.2"
+
+# as is, the model is taking 20% of the training data and validating against that
+# and also validating against the validation data
+# so the accuracy in the plot, and the accuracy value reported under the plot will be slightly different
+
+Now that we have our least loss model and it's assigned to least_loss_model, we can use that to predict on our testing data!
+
+y_predicted = least_lost_model.predict(x_test)
+y_predicted = (y_predicted > 0.5).astype(int).reshape(-1,)
+            # will initially report floats that are not quite 0 or 1
+            # this pushes anything above 0.5 to be 1, anything below to be 0
+            # reshapes it into a one-dimensional array
+y_predicted
+
+# And now the moment we've been waiting for, seeing how well we did with our nice table!
+print(classification_report(y_test, y_predicted))
+
+performed pretty well, but similarly to the SVF() from before.
 
 02:10:12 Linear Regression
+
+
+
+
 02:34:54 Lin Regression Implementation
 02:57:44 Lin Regression using a Neuron
 03:00:15 Regression NN using Tensorflow
